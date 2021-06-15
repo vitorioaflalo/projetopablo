@@ -1,0 +1,87 @@
+{% extends "account/base.html" %} {% load crispy_forms_tags %}{% load i18n %} {% block head_title %}{% trans "Cadastro" %}{% endblock %} {% block content %}
+<style>
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 210px;
+        background: #636282;
+        padding: 6px 14px;
+        z-index: 99;
+        transition: all 0.5s ease;
+    }
+    
+    body {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        background: #F5F8FF;
+    }
+    
+    body,
+    input,
+    button {
+        font-family: Lato, sans-serif !important;
+    }
+    
+    h1 {
+        margin-left: 490px;
+        margin-top: 130px;
+        font-weight: bold;
+        font-size: 35px;
+    }
+    
+    p {
+        text-align: center;
+    }
+    
+    #botao {
+        text-align: center
+    }
+    
+    .botaoEnviar {
+        width: 350px;
+        text-align: center;
+        padding: 15px 20px;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        background-color: #636282;
+        font-size: 18px;
+    }
+    
+    .linklogin {
+        color: #636282;
+        margin-left: 150px;
+    }
+    
+    .cartao {
+        margin-left: 150px;
+    }
+</style>
+<h1>{% trans "Crie sua conta" %}</h1>
+<p class="cartao">Relaxa! Não pediremos nenhum dado do seu cartão.</p>
+<div class="sidebar">
+    <div class="logo_content">
+        <div class="logo">
+            <img src="templates\account\imagens\logopablo.png" alt="logo">
+        </div>
+        <i class='bx bx-menu' id="btn"></i>
+    </div>
+
+</div>
+
+<form style="margin-left: 450px;" tyleclass="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    <main class="container">
+        <div class="row">
+            <div id="botao" lass="col-8">
+                {% csrf_token %} {{ form|crispy}} {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+                <button class="botaoEnviar" type="submit">{% trans "Cadastrar" %} &raquo;</button>
+            </div>
+        </div>
+    </main>
+</form>
+<p class="linklogin ">{% blocktrans %} <a href=" {{ login_url }} ">Já possuo login</a>.{% endblocktrans %}</p>
+{% endblock %}

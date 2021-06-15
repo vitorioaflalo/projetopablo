@@ -1,0 +1,55 @@
+{% extends "account/base.html" %} {% load crispy_forms_tags %} {% load i18n %} {% load account socialaccount %} {% block head_title %}{% trans "Sign In" %}{% endblock %} {% block content %}
+
+<!-- Esses templates (TODOS) foram exportados do github do django-allauth.É possível criar seus próprios templates. O visual está bem cru (precisa melhorar html/css de acordo com o site do Pablo) -->
+
+<style type="text/css">
+    body {
+        background-color: #636282;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    h1 {
+        color: rgb(0, 0, 0);
+        text-align: center;
+        margin-top: 150px;
+    }
+    
+    div {
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        width: 120px;
+    }
+</style>
+<img src="" alt="">
+
+<h1>{% trans "Login" %}</h1>
+
+
+
+<div class="socialaccount_ballot">
+
+    <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </ul>
+
+
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+    <main class="container">
+        <div class="row">
+            <div id="botao" lass="col-8">
+                {% csrf_token %} {{ form|crispy}} {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+                <button class="botaoEnviar" type="submit">{% trans "Entrar" %} &raquo;</button>
+            </div>
+        </div>
+        <p>
+            <a href="http://127.0.0.1:8000/accounts/signup">Quero criar minha conta</a> </p> <br>
+
+        <p>
+            <a href=" http://127.0.0.1:8000/accounts/password/reset/ ">Não lembro minha senha</a>
+        </p>{% endblock %}

@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}A confirmação da conta foi enviada para {{email}}.{% endblocktrans %}
